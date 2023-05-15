@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Distância</title>
+  <script>
+    function calcularDistancia() {
+      // Obter os valores dos pontos x1, y1, x2, y2
+      var x1 = parseFloat(document.getElementById("x1").value);
+      var y1 = parseFloat(document.getElementById("y1").value);
+      var x2 = parseFloat(document.getElementById("x2").value);
+      var y2 = parseFloat(document.getElementById("y2").value);
+
+      // Calcular a distância entre os pontos
+      var distancia = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+
+      // Verificar se a distância tem uma raiz não inteira
+      var raiz = Math.sqrt(distancia);
+      var resposta;
+
+      if (Number.isInteger(raiz)) {
+        resposta = distancia.toFixed(2); // Arredondar para 2 casas decimais
+      } else {
+        resposta = raiz.toFixed(2); // Arredondar a raiz para 2 casas decimais
+      }
+
+      // Exibir a resposta
+      document.getElementById("resposta").innerHTML = "A distância entre os pontos é: " + resposta;
+
+      // Exibir a mensagem de aviso se a resposta for decimal
+      if (!Number.isInteger(raiz)) {
+        document.getElementById("aviso").innerHTML = "Observação: O valor exato pode ser uma raiz não inteira.";
+      } else {
+        document.getElementById("aviso").innerHTML = "";
+      }
+    }
+
+    function gerarProblema() {
+      // Gerar coordenadas aleatórias para os pontos x1, y1, x2, y2
+      document.getElementById("x1").value = Math.floor(Math.random() * 10);
+      document.getElementById("y1").value = Math.floor(Math.random() * 10);
+      document.getElementById("x2").value = Math.floor(Math.random() * 10);
+      document.getElementById("y2").value = Math.floor(Math.random() * 10);
+
+      // Limpar a resposta e o aviso
+      document.getElementById("resposta").innerHTML = "";
+      document.getElementById("aviso").innerHTML = "";
+    }
+  </script>
+</head>
+<body>
+  <h1>Calculadora de Distância</h1>
+  <label for="x1">Ponto 1 - x:</label>
+  <input type="number" id="x1"><br>
+  <label for="y1">Ponto 1 - y:</label>
+  <input type="number" id="y1"><br>
+  <label for="x2">Ponto 2 - x:</label>
+  <input type="number" id="x2"><br>
+  <label for="y2">Ponto 2 - y:</label>
+  <input type="number" id="y2"><br>
+  <button onclick="calcularDistancia()">Calcular Distância</button>
+  <button onclick="gerarProblema()">Gerar Outro Problema</button><br>
+  <p id="resposta"></p>
+  <p id="aviso"></p>
+</body>
+</html>
